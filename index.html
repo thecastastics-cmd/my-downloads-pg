@@ -1,136 +1,166 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Metal Team City</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Castastics On The Run - Download App</title>
     <style>
-        body { margin: 0; overflow: hidden; background: #000; font-family: 'Courier New', monospace; touch-action: none; }
-        canvas { display: block; width: 100vw; height: 100vh; }
-        #menu { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); color: white; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 10; text-align: center; }
-        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 15px; }
-        .card { border: 2px solid #333; padding: 5px; border-radius: 10px; background: #111; width: 80px; font-size: 12px; }
-        .card.selected { border-color: #0f0; box-shadow: 0 0 10px #0f0; }
-        .card img { width: 50px; height: 50px; object-fit: contain; }
-        button { padding: 15px 40px; background: #0f0; border: none; font-weight: bold; border-radius: 50px; font-size: 20px; cursor: pointer; box-shadow: 0 5px #060; }
-        #ui { position: absolute; top: 10px; left: 10px; color: #0f0; z-index: 5; pointer-events: none; text-shadow: 2px 2px #000; }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f7;
+            margin: 0;
+            padding: 15px;
+            color: #333;
+        }
+        /* Top App Identity */
+        .app-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .app-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 18px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .app-title h1 {
+            font-size: 20px;
+            margin: 0 0 5px 0;
+        }
+        .developer {
+            color: #007aff;
+            font-size: 14px;
+            margin: 0;
+        }
+        .badge {
+            display: inline-block;
+            background-color: #e2f7ed;
+            color: #107c41;
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-size: 11px;
+            margin-top: 5px;
+            font-weight: bold;
+        }
+
+        /* Direct APK Download Button */
+        .download-btn {
+            display: block;
+            background-color: #30c37c;
+            color: white;
+            text-align: center;
+            padding: 16px;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 18px;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(48, 195, 124, 0.3);
+            margin-bottom: 25px;
+        }
+        .download-btn:active {
+            background-color: #28a768;
+        }
+
+        /* Trailers Section */
+        .section-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin: 15px 0 10px 0;
+            color: #555;
+        }
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            background: #000;
+        }
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* APKPure Style Horizontal Screenshot Carousel */
+        .screenshot-carousel {
+            display: flex;
+            overflow-x: auto;
+            gap: 12px;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+        }
+        .screenshot-carousel img {
+            width: 200px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+            scroll-snap-align: start;
+            flex-shrink: 0;
+        }
+
+        /* Game Info Description Box */
+        .description-box {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            line-height: 1.5;
+        }
+        .description-box h3 {
+            margin-top: 0;
+            font-size: 16px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 8px;
+        }
     </style>
 </head>
 <body>
-    <div id="ui">SCORE: <span id="s">0</span> | BEST: <span id="b">0</span></div>
-    <div id="menu">
-        <h1 style="color:#0f0; letter-spacing: 5px;">METAL TEAM</h1>
-        <div class="grid">
-            <div class="card selected" id="c-james" onclick="sel('james')"><img src="james.png"><br>James</div>
-            <div class="card" id="c-key" onclick="sel('key')"><img src="key.png"><br>Key</div>
-            <div class="card" id="c-lock" onclick="sel('lock')"><img src="lock.png"><br>Lock</div>
-            <div class="card" id="c-goldy" onclick="sel('goldy')"><img src="goldy.png"><br>Goldy</div>
-            <div class="card" id="c-bee" onclick="sel('bee')"><img src="bee.png"><br>Bee</div>
+
+    <div class="app-header">
+        <img src="game-icon.png" alt="Castastics Icon" class="app-icon">
+        <div class="app-title">
+            <h1>Castastics On The Run</h1>
+            <p class="developer">David Artsy</p>
+            <span class="badge">v1.0 (Direct APK Build)</span>
         </div>
-        <button onclick="go()">START ENGINE</button>
     </div>
-    <canvas id="g"></canvas>
-<script>
-const canvas = document.getElementById('g');
-const ctx = canvas.getContext('2d');
-const sprites = {};
-['james','key','lock','goldy','bee'].forEach(n => { sprites[n] = new Image(); sprites[n].src = n + ".png"; });
 
-let active = false; let score = 0; let lane = 1; let speed = 6;
-let obs = []; let selected = 'james'; let timer = 0; let roadOffset = 0;
-let high = localStorage.getItem('metal_best') || 0;
-document.getElementById('b').innerText = high;
+    <a href="https://github.com/YOUR_USERNAME/YOUR_REPO/raw/main/CastasticsOnTheRun.apk" class="download-btn">
+        Download Game Securely
+    </a>
 
-// AUDIO ENGINE
-const audio = new (window.AudioContext || window.webkitAudioContext)();
-function beep(f, d, t, g=0.1) {
-    const o = audio.createOscillator(); const v = audio.createGain();
-    o.type = t; o.frequency.value = f; v.gain.setValueAtTime(g, audio.currentTime);
-    v.gain.exponentialRampToValueAtTime(0.01, audio.currentTime + d);
-    o.connect(v); v.connect(audio.destination); o.start(); o.stop(audio.currentTime + d);
-}
+    <div class="section-title">Official Game Trailer</div>
+    <div class="video-wrapper">
+        <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID" allowfullscreen></iframe>
+    </div>
 
-function playMusic() {
-    if(!active) return;
-    const notes = [110, 123, 146, 164]; 
-    beep(notes[Math.floor(timer%4)], 0.2, 'square', 0.05);
-    setTimeout(playMusic, 250);
-}
+    <div class="section-title">Screenshots & Roster</div>
+    <div class="screenshot-carousel">
+        <img src="shot1.png" alt="Gameplay Action">
+        <img src="shot2.png" alt="400 Characters Roster">
+        <img src="shot3.png" alt="Crossover Cameos">
+        <img src="shot4.png" alt="Level Selection">
+        <img src="shot5.png" alt="High Score Run">
+    </div>
 
-function sel(n) {
-    selected = n;
-    document.querySelectorAll('.card').forEach(c => c.classList.remove('selected'));
-    document.getElementById('c-'+n).classList.add('selected');
-    beep(440, 0.1, 'sine');
-}
+    <div class="description-box">
+        <h3>Game Overview</h3>
+        <p>Take control of an massive universe featuring over 400 unique characters! Dodge obstacles, collect items, and outrun the chaos in this high-speed mobile runner developed entirely by David Artsy.</p>
+    </div>
 
-function go() { 
-    if(audio.state === 'suspended') audio.resume();
-    document.getElementById('menu').style.display='none'; 
-    active=true; score=0; speed=6; obs=[]; 
-    playMusic(); spawn(); loop(); 
-}
-
-function spawn() {
-    if(!active) return;
-    obs.push({x: Math.floor(Math.random()*3), y: -150, type: Math.random() > 0.5 ? 'bar' : 'cone'});
-    setTimeout(spawn, Math.max(300, 1000 - (speed * 12)));
-}
-
-window.addEventListener('touchstart', e => {
-    if(!active) return;
-    beep(300, 0.1, 'triangle');
-    if(e.touches[0].clientX < window.innerWidth/2) { if(lane > 0) lane--; }
-    else { if(lane < 2) lane++; }
-});
-
-function drawRoad() {
-    roadOffset += speed;
-    ctx.fillStyle = '#222'; ctx.fillRect(0,0,canvas.width,canvas.height);
-    // Lanes
-    ctx.strokeStyle = '#333'; ctx.lineWidth = 5;
-    for(let i=1; i<3; i++) {
-        ctx.setLineDash([20, 40]); ctx.lineDashOffset = -roadOffset;
-        ctx.beginPath(); ctx.moveTo(i*(canvas.width/3), 0); ctx.lineTo(i*(canvas.width/3), canvas.height); ctx.stroke();
-    }
-    ctx.setLineDash([]); // Reset
-    // Side curbs
-    ctx.fillStyle = '#444'; ctx.fillRect(0,0,10,canvas.height); ctx.fillRect(canvas.width-10,0,10,canvas.height);
-}
-
-function loop() {
-    if(!active) return;
-    drawRoad();
-    timer += 0.15; score++; speed += 0.002;
-
-    obs.forEach((o, i) => {
-        o.y += speed;
-        const ox = o.x*(canvas.width/3);
-        if(o.type === 'bar') {
-            ctx.fillStyle = '#d00'; ctx.fillRect(ox+10, o.y, (canvas.width/3)-20, 30);
-            ctx.fillStyle = '#fff'; ctx.fillRect(ox+20, o.y+10, (canvas.width/3)-40, 10);
-        } else {
-            ctx.fillStyle = '#f90'; ctx.beginPath(); ctx.moveTo(ox+canvas.width/6, o.y); ctx.lineTo(ox+20, o.y+60); ctx.lineTo(ox+(canvas.width/3)-20, o.y+60); ctx.fill();
-        }
-        
-        if(o.y > canvas.height) obs.splice(i,1);
-        if(o.y > canvas.height-180 && o.y < canvas.height-80 && o.x === lane) {
-            active = false; beep(100, 0.5, 'sawtooth');
-            if(Math.floor(score/10) > high) localStorage.setItem('metal_best', Math.floor(score/10));
-            alert("WASTED! Score: " + Math.floor(score/10)); location.reload();
-        }
-    });
-
-    // Player
-    const px = lane * (canvas.width/3) + (canvas.width/6);
-    const py = canvas.height - 150 + Math.sin(timer)*8;
-    ctx.save(); ctx.translate(px, py); ctx.rotate(Math.sin(timer*0.8)*0.08);
-    if(sprites[selected].complete) ctx.drawImage(sprites[selected], -50, -50, 100, 100);
-    ctx.restore();
-
-    document.getElementById('s').innerText = Math.floor(score/10);
-    requestAnimationFrame(loop);
-}
-canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-</script>
 </body>
 </html>
