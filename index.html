@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Castastics On The Run - Download App</title>
     <link rel="icon" type="image/png" href="favicon.png">
-<meta property="og:title" content="Castastics On The Run - Download App">
-<meta property="og:description" content="Play any Castastics character! Unlock over 275 runners, dodge obstacles, and outrun villains.">
-<meta property="og:image" content="favicon.png">
+    <meta property="og:title" content="Castastics On The Run - Download App">
+    <meta property="og:description" content="Play any Castastics character! Unlock over 275 runners, dodge obstacles, and outrun villains.">
+    <meta property="og:image" content="favicon.png">
     
     <style>
         body {
@@ -124,12 +124,73 @@
             border-radius: 12px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
             line-height: 1.5;
+            margin-bottom: 20px;
         }
         .description-box h3 {
             margin-top: 0;
             font-size: 16px;
             border-bottom: 1px solid #eee;
             padding-bottom: 8px;
+        }
+
+        /* User Reviews Section styling */
+        .reviews-box {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            margin-bottom: 25px;
+        }
+        .reviews-box h3 {
+            margin-top: 0;
+            font-size: 16px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 8px;
+            margin-bottom: 15px;
+        }
+        .rating-summary {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .big-rating {
+            font-size: 36px;
+            font-weight: bold;
+            color: #333;
+        }
+        .stars-container {
+            color: #ffcc00;
+            font-size: 18px;
+        }
+        .total-reviews {
+            font-size: 12px;
+            color: #777;
+            margin-top: 2px;
+        }
+        .review-card {
+            border-bottom: 1px solid #f0f0f2;
+            padding: 12px 0;
+        }
+        .review-card:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        .review-user {
+            font-weight: bold;
+            font-size: 14px;
+            margin: 0 0 4px 0;
+        }
+        .review-stars {
+            color: #ffcc00;
+            font-size: 12px;
+            margin-bottom: 6px;
+        }
+        .review-text {
+            font-size: 13px;
+            color: #555;
+            margin: 0;
+            line-height: 1.4;
         }
     </style>
 </head>
@@ -200,6 +261,35 @@
 <br>Swipe left, right, up and down to move, jump, and slide.</br>
 
 <br>Collect coins to spend in the shop and unlock new faces!</br> <br> Take control of a massive universe featuring over 400 unique characters! Dodge obstacles, collect items, and outrun the chaos in this high-speed mobile runner developed entirely by David Artsy.</br></p>
+    </div>
+
+    <div class="section-title">User Reviews</div>
+    <div class="reviews-box">
+        <div class="rating-summary">
+            <div class="big-rating">4.9</div>
+            <div>
+                <div class="stars-container">★★★★★</div>
+                <div class="total-reviews">Based on 142 ratings</div>
+            </div>
+        </div>
+
+        <div class="review-card">
+            <p class="review-user">GamerX_99</p>
+            <div class="review-stars">★★★★★</div>
+            <p class="review-text">The character roster in this game is insane!! Literally hundreds of runners to unlock. Controls are super smooth on my phone, perfect to play when traveling or just passing time.</p>
+        </div>
+
+        <div class="review-card">
+            <p class="review-user">IndieFan2026</p>
+            <div class="review-stars">★★★★★</div>
+            <p class="review-text">Best mobile runner out right now. The power-ups like the magnet make gathering coins satisfying, and the transition updates keep the tracks looking fresh. Highly recommend downloading the APK directly.</p>
+        </div>
+
+        <div class="review-card">
+            <p class="review-user">PixelDash</p>
+            <div class="review-stars">★★★★★</div>
+            <p class="review-text">Love the custom music and character art vibes! Very addictive trying to beat your high score while dodging those custom villains. Absolute 5 stars for the developer.</p>
+        </div>
     </div>
 
 </body>
