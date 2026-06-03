@@ -14,9 +14,31 @@
             font-family: Arial, sans-serif;
             background-color: #f4f4f7;
             margin: 0;
-            padding: 15px;
+            padding: 0 0 15px 0; /* Adjusted for full-width banner */
             color: #333;
         }
+
+        /* NEW: Top Promotional Banner */
+        .top-banner {
+            width: 100%;
+            height: auto;
+            max-height: 180px;
+            overflow: hidden;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .top-banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Container padding for content below banner */
+        .content-container {
+            padding: 0 15px;
+        }
+
         /* Top App Identity */
         .app-header {
             display: flex;
@@ -168,6 +190,50 @@
             color: #777;
             margin-top: 2px;
         }
+
+        /* NEW: Submit Review Form Styling */
+        .add-review-form {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #e9ecef;
+        }
+        .add-review-form h4 {
+            margin: 0 0 10px 0;
+            font-size: 14px;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 10px;
+        }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 13px;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        .form-group textarea {
+            resize: vertical;
+            height: 60px;
+        }
+        .submit-review-btn {
+            background-color: #007aff;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+        .submit-review-btn:hover {
+            background-color: #0056b3;
+        }
+
         .review-card {
             border-bottom: 1px solid #f0f0f2;
             padding: 12px 0;
@@ -196,101 +262,195 @@
 </head>
 <body>
 
-    <div class="app-header">
-        <img src="game-icon.png" alt="Castastics Icon" class="app-icon">
-        <div class="app-title">
-            <h1>Castastics On The Run</h1>
-            <p class="developer">David Artsy</p>
-            <span class="badge">v75.1 (1K+ Downloads)</span>
-        </div>
+    <!-- NEW: Top Banner Element -->
+    <div class="top-banner">
+        <img src="game-banner.png" alt="Castastics On The Run Banner">
     </div>
 
-    <a href="Castastics On The Run.apk" class="download-btn">
-        Download Game Securely
-    </a>
+    <!-- Wrapped everything inside content container for clean padding -->
+    <div class="content-container">
 
-    <div class="section-title">Official Game Trailer</div>
-    <div class="video-wrapper">
-        <iframe src="https://www.youtube.com/embed/nOXZltxpLmo" allowfullscreen></iframe>
-    </div>
-
-    <div class="section-title">Screenshots & Roster</div>
-    <div class="screenshot-carousel">
-        <img src="shot1.png" alt="Character Roster">
-        <img src="shot2.png" alt="The Death Screen">
-        <img src="shot3.png" alt="Powerups">
-        <img src="shot4.png" alt="Avoid Castastic Villains">
-        <img src="shot5.png" alt="Get A High Score">
-        <img src="shot6.png" alt="Play As David">
-        <img src="shot7.png" alt="Run As Any Castastics Hero">
-        <img src="shot8.png" alt="Different Maps">
-    </div>
-
-    <div class="description-box">
-        <h3>Game Overview</h3>
-        <p><h3>About Castastics On The Run</h3>
-<br>A runner game in the CastasticVerse, play any Castastics character! 🐾🌟</br>
-<br>🏃‍♂️ Castastics On The Run!</br>
-<br>Welcome to the ultimate endless runner experience! Castastics On The Run! Is a fast-paced, high-stakes mobile adventure where your reflexes are the only thing standing between you and a "Crashed!" screen.</br>
-        
-        <br>🎮 Game Features
- - Massive Character Roster: Unlock and play as over 275 unique characters! From Commons to Ultra-Rares, build your collection and find your favorite runner.</br>
-
-<br>Action-Packed Gameplay: Test your skills with smooth mobile controls—Jump over obstacles, Slide under barriers, and weave through traffic to keep your run alive.</br>
-
-<br>Epic Villain Encounters: Watch out! You aren't alone on the road. Three dangerous villains are on the prowl, ready to attack and end your streak at any moment.</br>
-
-<br>Powerful Boosts: Level up your run by collecting game-changing power-ups:</br>
-
-<br>🧲 Magnet: Pull in every coin in sight without moving an inch.</br>
-
-<br>🛡️ Shield: Protect yourself from a single crash.</br>
-
-<br>✨ Multiplier: Double your score gain and climb the leaderboard faster.</br>
-
-<br>Daily Rewards: Loyalty pays off! Log in every 24 hours to claim your Daily Reward of 1,000 coins to help unlock that next legendary character.</br>
-
-<br>High Score Mastery: Track your "Best Score" and "Bank" total as you compete to become the ultimate Castastics Master.</br>
-
-<br>🕹️ How to Play</br>
-
-<br>Open the game, you can also skip the intro to quickly get into the action!</br>
-
-<br>Hit "RUN!" to start.</br>
-
-<br>Swipe left, right, up and down to move, jump, and slide.</br>
-
-<br>Collect coins to spend in the shop and unlock new faces!</br> <br> Take control of a massive universe featuring over 400 unique characters! Dodge obstacles, collect items, and outrun the chaos in this high-speed mobile runner developed entirely by David Artsy.</br></p>
-    </div>
-
-    <div class="section-title">User Reviews</div>
-    <div class="reviews-box">
-        <div class="rating-summary">
-            <div class="big-rating">4.9</div>
-            <div>
-                <div class="stars-container">★★★★★</div>
-                <div class="total-reviews">Based on 142 ratings</div>
+        <div class="app-header">
+            <img src="game-icon.png" alt="Castastics Icon" class="app-icon">
+            <div class="app-title">
+                <h1>Castastics On The Run</h1>
+                <p class="developer">David Artsy</p>
+                <span class="badge">v75.1 (1K+ Downloads)</span>
             </div>
         </div>
 
-        <div class="review-card">
-            <p class="review-user">GamerX_99</p>
-            <div class="review-stars">★★★★★</div>
-            <p class="review-text">The character roster in this game is insane!! Literally hundreds of runners to unlock. Controls are super smooth on my phone, perfect to play when traveling or just passing time.</p>
+        <a href="Castastics On The Run.apk" class="download-btn">
+            Download Game Securely
+        </a>
+
+        <div class="section-title">Official Game Trailer</div>
+        <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/nOXZltxpLmo" allowfullscreen></iframe>
         </div>
 
-        <div class="review-card">
-            <p class="review-user">IndieFan2026</p>
-            <div class="review-stars">★★★★★</div>
-            <p class="review-text">Best mobile runner out right now. The power-ups like the magnet make gathering coins satisfying, and the transition updates keep the tracks looking fresh. Highly recommend downloading the APK directly.</p>
+        <div class="section-title">Screenshots & Roster</div>
+        <div class="screenshot-carousel">
+            <img src="shot1.png" alt="Character Roster">
+            <img src="shot2.png" alt="The Death Screen">
+            <img src="shot3.png" alt="Powerups">
+            <img src="shot4.png" alt="Avoid Castastic Villains">
+            <img src="shot5.png" alt="Get A High Score">
+            <img src="shot6.png" alt="Play As David">
+            <img src="shot7.png" alt="Run As Any Castastics Hero">
+            <img src="shot8.png" alt="Different Maps">
         </div>
 
-        <div class="review-card">
-            <p class="review-user">PixelDash</p>
-            <div class="review-stars">★★★★★</div>
-            <p class="review-text">Love the custom music and character art vibes! Very addictive trying to beat your high score while dodging those custom villains. Absolute 5 stars for the developer.</p>
+        <div class="description-box">
+            <h3>Game Overview</h3>
+            <h3>About Castastics On The Run</h3>
+            <br>A runner game in the CastasticVerse, play any Castastics character! 🐾🌟<br>
+            <br>🏃‍♂️ Castastics On The Run!<br>
+            <br>Welcome to the ultimate endless runner experience! Castastics On The Run! Is a fast-paced, high-stakes mobile adventure where your reflexes are the only thing standing between you and a "Crashed!" screen.<br>
+            
+            <br>🎮 Game Features
+            - Massive Character Roster: Unlock and play as over 275 unique characters! From Commons to Ultra-Rares, build your collection and find your favorite runner.<br>
+
+            <br>Action-Packed Gameplay: Test your skills with smooth mobile controls—Jump over obstacles, Slide under barriers, and weave through traffic to keep your run alive.<br>
+
+            <br>Epic Villain Encounters: Watch out! You aren't alone on the road. Three dangerous villains are on the prowl, ready to attack and end your streak at any moment.<br>
+
+            <br>Powerful Boosts: Level up your run by collecting game-changing power-ups:<br>
+
+            <br>🧲 Magnet: Pull in every coin in sight without moving an inch.<br>
+
+            <br>🛡️ Shield: Protect yourself from a single crash.<br>
+
+            <br>✨ Multiplier: Double your score gain and climb the leaderboard faster.<br>
+
+            <br>Daily Rewards: Loyalty pays off! Log in every 24 hours to claim your Daily Reward of 1,000 coins to help unlock that next legendary character.<br>
+
+            <br>High Score Mastery: Track your "Best Score" and "Bank" total as you compete to become the ultimate Castastics Master.<br>
+
+            <br>🕹️ How to Play<br>
+
+            <br>Open the game, you can also skip the intro to quickly get into the action!<br>
+
+            <br>Hit "RUN!" to start.<br>
+
+            <br>Swipe left, right, up and down to move, jump, and slide.<br>
+
+            <br>Collect coins to spend in the shop and unlock new faces!<br> 
+            <br> Take control of a massive universe featuring over 400 unique characters! Dodge obstacles, collect items, and outrun the chaos in this high-speed mobile runner developed entirely by David Artsy.<br>
         </div>
+
+        <div class="section-title">User Reviews</div>
+        <div class="reviews-box">
+            <div class="rating-summary">
+                <div class="big-rating" id="avg-rating-display">4.9</div>
+                <div>
+                    <div class="stars-container">★★★★★</div>
+                    <div class="total-reviews" id="total-reviews-count">Based on 142 ratings</div>
+                </div>
+            </div>
+
+            <!-- NEW: Interactive Review Submission Form -->
+            <div class="add-review-form">
+                <h4>Leave a Review</h4>
+                <form id="reviewForm">
+                    <div class="form-group">
+                        <input type="text" id="usernameInput" placeholder="Your Name / Nickname" required>
+                    </div>
+                    <div class="form-group">
+                        <select id="ratingInput" required>
+                            <option value="" disabled selected>Give it a rating</option>
+                            <option value="5">★★★★★ (5 Stars)</option>
+                            <option value="4">★★★★☆ (4 Stars)</option>
+                            <option value="3">★★★☆☆ (3 Stars)</option>
+                            <option value="2">★★☆☆☆ (2 Stars)</option>
+                            <option value="1">★☆☆☆☆ (1 Star)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="reviewTextInput" placeholder="Write your game review here..." required></textarea>
+                    </div>
+                    <button type="submit" class="submit-review-btn">Submit Review</button>
+                </form>
+            </div>
+
+            <!-- Dynamic reviews will be placed on top of this container -->
+            <div id="reviews-list-container">
+                <!-- Existing Review 1 -->
+                <div class="review-card">
+                    <p class="review-user">GamerX_99</p>
+                    <div class="review-stars">★★★★★</div>
+                    <p class="review-text">The character roster in this game is insane!! Literally hundreds of runners to unlock. Controls are super smooth on my phone, perfect to play when traveling or just passing time.</p>
+                </div>
+
+                <!-- Existing Review 2 -->
+                <div class="review-card">
+                    <p class="review-user">IndieFan2026</p>
+                    <div class="review-stars">★★★★★</div>
+                    <p class="review-text">Best mobile runner out right now. The power-ups like the magnet make gathering coins satisfying, and the transition updates keep the tracks looking fresh. Highly recommend downloading the APK directly.</p>
+                </div>
+
+                <!-- Existing Review 3 -->
+                <div class="review-card">
+                    <p class="review-user">PixelDash</p>
+                    <div class="review-stars">★★★★★</div>
+                    <p class="review-text">Love the custom music and character art vibes! Very addictive trying to beat your high score while dodging those custom villains. Absolute 5 stars for the developer.</p>
+                </div>
+            </div>
+        </div>
+
     </div>
 
+    <!-- NEW: JavaScript logic to add functional reviews dynamically -->
+    <script>
+        // Track stats starting with your base values
+        let runningTotalReviews = 142;
+        let runningTotalScore = 142 * 4.9; // Emulate baseline total score calculation
+
+        document.getElementById('reviewForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Stop page from refreshing
+
+            // Get form values
+            const username = document.getElementById('usernameInput').value.trim();
+            const ratingValue = parseInt(document.getElementById('ratingInput').value);
+            const reviewText = document.getElementById('reviewTextInput').value.trim();
+
+            // Convert raw rating number to visual unicode stars
+            let starStrings = "";
+            for (let i = 1; i <= 5; i++) {
+                if (i <= ratingValue) {
+                    starStrings += "★";
+                } else {
+                    starStrings += "☆";
+                }
+            }
+
+            // Create new Review HTML elements
+            const newCard = document.createElement('div');
+            newCard.className = 'review-card';
+            
+            newCard.innerHTML = `
+                <p class="review-user">${username}</p>
+                <div class="review-stars">${starStrings}</div>
+                <p class="review-text">${reviewText}</p>
+            `;
+
+            // Insert the new review right at the top of the reviews block list
+            const container = document.getElementById('reviews-list-container');
+            container.insertBefore(newCard, container.firstChild);
+
+            // Update real-time summary counter numbers
+            runningTotalReviews += 1;
+            runningTotalScore += ratingValue;
+            
+            // Recalculate dynamic average rating mathematically 
+            let newAvg = (runningTotalScore / runningTotalReviews).toFixed(1);
+
+            // Print new counts directly to page elements live
+            document.getElementById('total-reviews-count').innerText = `Based on ${runningTotalReviews} ratings`;
+            document.getElementById('avg-rating-display').innerText = newAvg;
+
+            // Reset form inputs for next user review
+            document.getElementById('reviewForm').reset();
+        });
+    </script>
 </body>
 </html>
