@@ -400,57 +400,131 @@
     </div>
 
     <!-- NEW: JavaScript logic to add functional reviews dynamically -->
-    <script>
-        // Track stats starting with your base values
-        let runningTotalReviews = 142;
-        let runningTotalScore = 142 * 4.9; // Emulate baseline total score calculation
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getDatabase, ref, onValue, push, set } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
-        document.getElementById('reviewForm').addEventListener('submit', function(e) {
-            e.preventDefault(); // Stop page from refreshing
+        // Using your secure, restricted Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBBx7S1tbTO02Y0TfSYodqJWRvLfQwq_Qs",
+            authDomain: "castastics-movies.firebaseapp.com",
+            databaseURL: "https://castastics-movies-default-rtdb.firebaseio.com",
+            projectId: "castastics-movies",
+            storageBucket: "castastics-movies.firebasestorage.app",
+            messagingSenderId: "194457932457",
+            appId: "1:194457932457:web:72e3372596f4f248a30fb8",
+            measurementId: "G-W59DD5SNZ6"
+        };
 
-            // Get form values
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+        const reviewsRef = ref(db, 'gameReviews');
+
+        // Baseline stats (your 142 historical reviews)
+        const BASE_REVIEWS = 142;
+        const BASE_SCORE = 142 * 4.9;
+
+        const container = document.getElementById('reviews-list-container');
+        const reviewForm = document.getElementById('reviewForm');
+
+        // 1. Listen for ALL global reviews live from Firebase cloud
+        onValue(reviewsRef, (snapshot) => {
+            // Clear existing list to prevent duplicates on update
+            container.innerHTML = "";
+
+            let addedReviewsCount = 0;
+            let addedReviewsScore = 0;
+            let reviewCardsHTML = "";
+
+            if (snapshot.exists()) {
+                const data = snapshot.val();
+                
+                // Reverse loop through keys to show newest cloud reviews first
+                const keys = Object.keys(data).reverse();
+                keys.forEach(key => {
+                    const r = data[key];
+                    addedReviewsCount++;
+                    addedReviewsScore += r.rating;
+
+                    let starStrings = "★".repeat(r.rating) + "☆".repeat(5 - r.rating);
+
+                    reviewCardsHTML += `
+                        <div class="review-card">
+                            <p class="review-user">${escapeHtml(r.username)}</p>
+                            <div class="review-stars">${starStrings}</div>
+                            <p class="review-text">${escapeHtml(r.text)}</p>
+                        </div>
+                    `;
+                });
+            }
+
+            // Append the 3 baseline placeholder reviews back at the very bottom
+            reviewCardsHTML += `
+                <div class="review-card">
+                    <p class="review-user">GamerX_99</p>
+                    <div class="review-stars">★★★★★</div>
+                    <p class="review-text">The character roster in this game is insane!! Literally hundreds of runners to unlock. Controls are super smooth on my phone, perfect to play when traveling or just passing time.</p>
+                </div>
+                <div class="review-card">
+                    <p class="review-user">IndieFan2026</p>
+                    <div class="review-stars">★★★★★</div>
+                    <p class="review-text">Best mobile runner out right now. The power-ups like the magnet make gathering coins satisfying, and the transition updates keep the tracks looking fresh. Highly recommend downloading the APK directly.</p>
+                </div>
+                <div class="review-card">
+                    <p class="review-user">PixelDash</p>
+                    <div class="review-stars">★★★★★</div>
+                    <p class="review-text">Love the custom music and character art vibes! Very addictive trying to beat your high score while dodging those custom villains. Absolute 5 stars for the developer.</p>
+                </div>
+            `;
+
+            container.innerHTML = reviewCardsHTML;
+
+            // Recalculate dynamic aggregates including baseline + cloud data
+            const totalReviews = BASE_REVIEWS + addedReviewsCount;
+            const totalScore = BASE_SCORE + addedReviewsScore;
+            const finalAvg = (totalScore / totalReviews).toFixed(1);
+
+            document.getElementById('total-reviews-count').innerText = `Based on ${totalReviews} ratings`;
+            document.getElementById('avg-rating-display').innerText = finalAvg;
+
+            // Optional: Hide form if this user has already left a review locally
+            if (localStorage.getItem('hasReviewedGame') === 'true') {
+                const formBlock = document.querySelector('.add-review-form');
+                if (formBlock) formBlock.innerHTML = "<h4>Thank you for leaving your review!</h4>";
+            }
+        });
+
+        // 2. Submit new review data globally to Firebase Cloud
+        reviewForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            if (localStorage.getItem('hasReviewedGame') === 'true') {
+                alert("You have already submitted a review for this game!");
+                return;
+            }
+
             const username = document.getElementById('usernameInput').value.trim();
             const ratingValue = parseInt(document.getElementById('ratingInput').value);
             const reviewText = document.getElementById('reviewTextInput').value.trim();
 
-            // Convert raw rating number to visual unicode stars
-            let starStrings = "";
-            for (let i = 1; i <= 5; i++) {
-                if (i <= ratingValue) {
-                    starStrings += "★";
-                } else {
-                    starStrings += "☆";
-                }
-            }
-
-            // Create new Review HTML elements
-            const newCard = document.createElement('div');
-            newCard.className = 'review-card';
-            
-            newCard.innerHTML = `
-                <p class="review-user">${username}</p>
-                <div class="review-stars">${starStrings}</div>
-                <p class="review-text">${reviewText}</p>
-            `;
-
-            // Insert the new review right at the top of the reviews block list
-            const container = document.getElementById('reviews-list-container');
-            container.insertBefore(newCard, container.firstChild);
-
-            // Update real-time summary counter numbers
-            runningTotalReviews += 1;
-            runningTotalScore += ratingValue;
-            
-            // Recalculate dynamic average rating mathematically 
-            let newAvg = (runningTotalScore / runningTotalReviews).toFixed(1);
-
-            // Print new counts directly to page elements live
-            document.getElementById('total-reviews-count').innerText = `Based on ${runningTotalReviews} ratings`;
-            document.getElementById('avg-rating-display').innerText = newAvg;
-
-            // Reset form inputs for next user review
-            document.getElementById('reviewForm').reset();
+            const newReviewRef = push(reviewsRef);
+            set(newReviewRef, {
+                username: username,
+                rating: ratingValue,
+                text: reviewText,
+                timestamp: Date.now()
+            }).then(() => {
+                localStorage.setItem('hasReviewedGame', 'true');
+                reviewForm.reset();
+            }).catch((error) => {
+                console.error("Database submission failed: ", error);
+            });
         });
+
+        // Helper function to keep database inputs clean and safe
+        function escapeHtml(str) {
+            return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+        }
     </script>
 </body>
 </html>
