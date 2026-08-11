@@ -8,38 +8,38 @@
         body {
             margin: 0;
             overflow: hidden;
-            background-color: #38bdf8;
+            background-color: #60a5fa;
             font-family: Arial, sans-serif;
             user-select: none;
             -webkit-user-select: none;
         }
         #ui {
             position: absolute;
-            top: 15px;
+            top: 12px;
             left: 50%;
             transform: translateX(-50%);
             color: #fff;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 13px;
+            background: rgba(0, 0, 0, 0.75);
+            padding: 6px 14px;
+            border-radius: 15px;
+            font-size: 12px;
             pointer-events: none;
             text-align: center;
             white-space: nowrap;
             z-index: 20;
             border: 1px solid rgba(255,255,255,0.3);
         }
-        /* Character Selector UI */
+        /* Character Selector Bar (Casta 1 to 100) */
         #char-selector {
             position: absolute;
-            top: 60px;
+            top: 50px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
             gap: 6px;
-            background: rgba(0,0,0,0.5);
-            padding: 6px 12px;
-            border-radius: 15px;
+            background: rgba(0,0,0,0.6);
+            padding: 5px 10px;
+            border-radius: 12px;
             z-index: 20;
             max-width: 90vw;
             overflow-x: auto;
@@ -49,28 +49,28 @@
             background: rgba(255,255,255,0.2);
             border: 1px solid white;
             color: white;
-            padding: 4px 10px;
-            border-radius: 8px;
-            font-size: 12px;
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-size: 11px;
             font-weight: bold;
             cursor: pointer;
             white-space: nowrap;
         }
         .char-btn.active {
-            background: #ffcc00;
+            background: #facc15;
             color: black;
-            border-color: #ffcc00;
+            border-color: #facc15;
         }
 
-        /* Mobile Touch Controls / D-Pad */
+        /* Mobile D-Pad Controls */
         .controls-container {
             position: absolute;
-            bottom: 30px;
-            left: 30px;
+            bottom: 25px;
+            left: 25px;
             display: grid;
-            grid-template-columns: 65px 65px 65px;
-            grid-template-rows: 65px 65px;
-            gap: 10px;
+            grid-template-columns: 60px 60px 60px;
+            grid-template-rows: 60px 60px;
+            gap: 8px;
             z-index: 20;
         }
         .control-btn {
@@ -78,14 +78,14 @@
             border: 2px solid rgba(255, 255, 255, 0.7);
             border-radius: 50%;
             color: white;
-            font-size: 24px;
+            font-size: 22px;
             font-weight: bold;
             display: flex;
             align-items: center;
             justify-content: center;
             outline: none;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
             backdrop-filter: blur(4px);
         }
         .control-btn:active {
@@ -97,45 +97,43 @@
         #btn-down { grid-column: 2; grid-row: 2; }
         #btn-right { grid-column: 3; grid-row: 2; }
 
-        /* Camera Rotate Buttons on Right Side */
+        /* Camera Rotation Controls */
         .cam-controls {
             position: absolute;
-            bottom: 40px;
-            right: 30px;
+            bottom: 30px;
+            right: 25px;
             display: flex;
-            gap: 15px;
+            gap: 12px;
             z-index: 20;
         }
         .cam-btn {
-            width: 65px;
-            height: 65px;
-            background: rgba(255, 165, 0, 0.3);
-            border: 2px solid rgba(255, 165, 0, 0.8);
+            width: 60px;
+            height: 60px;
+            background: rgba(249, 115, 22, 0.35);
+            border: 2px solid rgba(249, 115, 22, 0.8);
             border-radius: 50%;
             color: white;
-            font-size: 22px;
+            font-size: 20px;
             font-weight: bold;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
             backdrop-filter: blur(4px);
         }
         .cam-btn:active {
-            background: rgba(255, 165, 0, 0.7);
+            background: rgba(249, 115, 22, 0.75);
             transform: scale(0.92);
         }
     </style>
 </head>
 <body>
 
-    <div id="ui">Trinidad Open World: Use D-Pad to walk, Cam buttons to rotate view!</div>
+    <div id="ui">Trinidad Detailed Cityscape: Walk the streets & explore!</div>
 
     <!-- Character Selector (Casta 1 to 100) -->
-    <div id="char-selector" id="charSelectorContainer">
-        <!-- Dynamically generated or populated -->
-    </div>
+    <div id="char-selector"></div>
 
     <!-- D-Pad Movement -->
     <div class="controls-container">
@@ -145,7 +143,7 @@
         <button class="control-btn" id="btn-right">▶</button>
     </div>
 
-    <!-- Camera Rotation Buttons -->
+    <!-- Camera Rotate Buttons -->
     <div class="cam-controls">
         <button class="cam-btn" id="cam-left">↺</button>
         <button class="cam-btn" id="cam-right">↻</button>
@@ -157,7 +155,7 @@
     <script>
         // 1. POPULATE CHARACTER SELECTOR (Casta 1 to 100)
         const selectorContainer = document.getElementById('char-selector');
-        let currentCastaFile = 'character.png'; // Default primary file
+        let currentCastaFile = 'character.png';
 
         for (let i = 1; i <= 100; i++) {
             const btn = document.createElement('button');
@@ -169,15 +167,15 @@
                 btn.classList.add('active');
                 currentCastaFile = btn.dataset.filename;
                 changePlayerTexture(currentCastaFile);
-                document.getElementById('ui').innerText = `Playing as Casta ${i}! Explore Trinidad!`;
+                document.getElementById('ui').innerText = `Playing as Casta ${i} in Downtown!`;
             };
             selectorContainer.appendChild(btn);
         }
 
         // 2. SETUP SCENE, CAMERA, & RENDERER
         const scene = new THREE.Scene();
-        scene.background = new THREE.Color(0x38bdf8); // Vibrant Caribbean Sky Blue
-        scene.fog = new THREE.FogExp2(0x38bdf8, 0.005);
+        scene.background = new THREE.Color(0x38bdf8); // Bright tropical blue sky
+        scene.fog = new THREE.FogExp2(0x38bdf8, 0.0035);
 
         const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
         
@@ -187,90 +185,102 @@
         renderer.outputEncoding = THREE.sRGBEncoding;
         document.body.appendChild(renderer.domElement);
 
-        // 3. LIGHTING (Tropical Sun)
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
+        // 3. LIGHTING (Tropical Sun Setup)
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.65);
         scene.add(ambientLight);
 
-        const sunLight = new THREE.DirectionalLight(0xfffbe8, 1.3);
-        sunLight.position.set(50, 80, 40);
+        const sunLight = new THREE.DirectionalLight(0xfffaed, 1.4);
+        sunLight.position.set(60, 100, 40);
         sunLight.castShadow = true;
+        sunLight.shadow.mapSize.width = 1024;
+        sunLight.shadow.mapSize.height = 1024;
         scene.add(sunLight);
 
-        // 4. BUILD TRINIDAD-INSPIRED ENVIRONMENT
-        // Ground (Tropical Land)
-        const floorGeo = new THREE.PlaneGeometry(500, 500);
-        const floorMat = new THREE.MeshStandardMaterial({ color: 0x2e8b57, roughness: 0.8 });
-        const floor = new THREE.Mesh(floorGeo, floorMat);
-        floor.rotation.x = -Math.PI / 2;
-        floor.receiveShadow = true;
-        scene.add(floor);
+        // 4. DETAILED TRINIDAD URBAN ENVIRONMENT
+        // Ground Grid / Streets Layout
+        const groundGeo = new THREE.PlaneGeometry(600, 600);
+        const groundMat = new THREE.MeshStandardMaterial({ color: 0x27272a, roughness: 0.9 }); // Asphalt color streets
+        const ground = new THREE.Mesh(groundGeo, groundMat);
+        ground.rotation.x = -Math.PI / 2;
+        ground.receiveShadow = true;
+        scene.add(ground);
 
-        // Caribbean Sea / Water Feature on one side
-        const waterGeo = new THREE.PlaneGeometry(500, 200);
-        const waterMat = new THREE.MeshStandardMaterial({ color: 0x0077be, roughness: 0.1, metalness: 0.8 });
-        const water = new THREE.Mesh(waterGeo, waterMat);
-        water.rotation.x = -Math.PI / 2;
-        water.position.set(0, 0.1, -250);
-        scene.add(water);
+        // Gulf of Paria Coastline / Sea Water on the West side
+        const seaGeo = new THREE.PlaneGeometry(600, 300);
+        const seaMat = new THREE.MeshStandardMaterial({ color: 0x0284c7, roughness: 0.2, metalness: 0.5 });
+        const sea = new THREE.Mesh(seaGeo, seaMat);
+        sea.rotation.x = -Math.PI / 2;
+        sea.position.set(-300, 0.05, 0);
+        scene.add(sea);
 
-        // Colorful Detailed Buildings (Port of Spain vibe - bright colors)
-        const bColors = [0xff4757, 0x2ed573, 0x1e90ff, 0xffa502, 0x9b59b6, 0x00d2d3];
-        for (let i = 0; i < 45; i++) {
-            const w = Math.random() * 6 + 4;
-            const h = Math.random() * 18 + 6;
-            const d = Math.random() * 6 + 4;
-            
-            const bGeo = new THREE.BoxGeometry(w, h, d);
-            const bMat = new THREE.MeshStandardMaterial({ color: bColors[Math.floor(Math.random() * bColors.length)], roughness: 0.4 });
-            const building = new THREE.Mesh(bGeo, bMat);
-            
-            building.position.x = (Math.random() - 0.5) * 300;
-            building.position.z = (Math.random() - 0.5) * 200;
-            building.position.y = h / 2;
+        // Iconic Background Hills (Lapeyrouse / Northern Range backdrop look)
+        const hillGeo = new THREE.ConeGeometry(120, 50, 8);
+        const hillMat = new THREE.MeshStandardMaterial({ color: 0x15803d, roughness: 1.0 });
+        const hill = new THREE.Mesh(hillGeo, hillMat);
+        hill.position.set(120, 25, -220);
+        scene.add(hill);
 
-            if (Math.abs(building.position.x) < 15 && Math.abs(building.position.z) < 15) building.position.x += 30;
+        const hill2 = new THREE.ConeGeometry(90, 40, 8);
+        const hill2Mesh = new THREE.Mesh(hill2, hillMat);
+        hill2Mesh.position.set(-60, 20, -240);
+        scene.add(hill2Mesh);
 
-            building.castShadow = true;
-            building.receiveShadow = true;
-            scene.add(building);
+        // Dense Downtown Port of Spain Buildings (Multi-story colorful structures & high-rises)
+        const wallColors = [0xf8fafc, 0xe2e8f0, 0xfca5a5, 0x93c5fd, 0xfde047, 0x67e8f9, 0xf43f5e, 0x3b82f6];
+        const roofColors = [0x991b1b, 0x1e293b, 0xb91c1c, 0x475569];
+
+        for (let xPos = -140; xPos <= 140; xPos += 25) {
+            for (let zPos = -140; zPos <= 140; zPos += 25) {
+                if (Math.abs(xPos) < 15 && Math.abs(zPos) < 15) continue; // Keep spawn center clear
+
+                const bWidth = 12 + Math.random() * 8;
+                const bDepth = 12 + Math.random() * 8;
+                const bHeight = 10 + Math.random() * 35; // Mix of regular blocks and taller towers
+
+                const buildingGroup = new THREE.Group();
+
+                // Main Building Body
+                const bodyGeo = new THREE.BoxGeometry(bWidth, bHeight, bDepth);
+                const bodyMat = new THREE.MeshStandardMaterial({ 
+                    color: wallColors[Math.floor(Math.random() * wallColors.length)], 
+                    roughness: 0.5 
+                });
+                const bodyMesh = new THREE.Mesh(bodyGeo, bodyMat);
+                bodyMesh.position.y = bHeight / 2;
+                bodyMesh.castShadow = true;
+                bodyMesh.receiveShadow = true;
+                buildingGroup.add(bodyMesh);
+
+                // Distinct Roof (Red/Dark corrugated style look)
+                const roofGeo = new THREE.BoxGeometry(bWidth + 0.6, 1.5, bDepth + 0.6);
+                const roofMat = new THREE.MeshStandardMaterial({ 
+                    color: roofColors[Math.floor(Math.random() * roofColors.length)], 
+                    roughness: 0.7 
+                });
+                const roofMesh = new THREE.Mesh(roofGeo, roofMat);
+                roofMesh.position.y = bHeight + 0.75;
+                roofMesh.castShadow = true;
+                buildingGroup.add(roofMesh);
+
+                buildingGroup.position.set(xPos + (Math.random() - 0.5) * 6, 0, zPos + (Math.random() - 0.5) * 6);
+                scene.add(buildingGroup);
+            }
         }
 
-        // Palm Trees (Trinidad Vibe)
-        function createPalmTree(x, z) {
-            const trunkGeo = new THREE.CylinderGeometry(0.3, 0.5, 6, 6);
-            const trunkMat = new THREE.MeshStandardMaterial({ color: 0x8b5a2b });
-            const trunk = new THREE.Mesh(trunkGeo, trunkMat);
-            trunk.position.set(x, 3, z);
-            trunk.castShadow = true;
-            scene.add(trunk);
-
-            const leavesGeo = new THREE.SphereGeometry(2, 6, 6);
-            const leavesMat = new THREE.MeshStandardMaterial({ color: 0x228b22 });
-            const leaves = new THREE.Mesh(leavesGeo, leavesMat);
-            leaves.position.set(x, 6.2, z);
-            leaves.scale.set(1.5, 0.5, 1.5);
-            leaves.castShadow = true;
-            scene.add(leaves);
-        }
-
-        for (let i = 0; i < 25; i++) {
-            createPalmTree((Math.random() - 0.5) * 350, (Math.random() - 0.5) * 300);
-        }
-
-        // Moving Cars on the Streets
+        // Cars / Traffic in the streets
         const cars = [];
-        const carColors = [0xffffff, 0x333333, 0xff0000, 0x0000ff, 0xffff00];
-        for (let i = 0; i < 8; i++) {
-            const carGeo = new THREE.BoxGeometry(2.2, 1.2, 4.5);
-            const carMat = new THREE.MeshStandardMaterial({ color: carColors[Math.floor(Math.random() * carColors.length)], metalness: 0.5 });
+        const carColors = [0xffffff, 0x111111, 0xdc2626, 0x2563eb, 0xca8a04];
+        for (let i = 0; i < 16; i++) {
+            const carGeo = new THREE.BoxGeometry(2.2, 1.1, 4.4);
+            const carMat = new THREE.MeshStandardMaterial({ color: carColors[Math.floor(Math.random() * carColors.length)], metalness: 0.4 });
             const car = new THREE.Mesh(carGeo, carMat);
-            car.position.set((Math.random() - 0.5) * 200, 0.6, (Math.random() - 0.5) * 200);
+            car.position.set((Math.random() - 0.5) * 220, 0.55, (Math.random() - 0.5) * 220);
             car.castShadow = true;
             scene.add(car);
-            cars.push({ mesh: car, speed: 0.3 + Math.random() * 0.4, dir: Math.random() > 0.5 ? 1 : -1 });
+            cars.push({ mesh: car, speed: 0.25 + Math.random() * 0.35, axis: Math.random() > 0.5 ? 'x' : 'z', dir: 1 });
         }
 
-        // 5. LOAD PLAYER CHARACTER SPRITE WITH IDLE BOUNCE ANIMATION
+        // 5. LOAD PLAYER CHARACTER SPRITE
         const textureLoader = new THREE.TextureLoader();
         let charTexture = textureLoader.load('character.png');
         charTexture.encoding = THREE.sRGBEncoding;
@@ -287,7 +297,6 @@
                 spriteMat.map = tex;
                 spriteMat.needsUpdate = true;
             }, undefined, () => {
-                // Fallback to default if casta file doesn't exist yet
                 textureLoader.load('character.png', (fallbackTex) => {
                     spriteMat.map = fallbackTex;
                     spriteMat.needsUpdate = true;
@@ -295,11 +304,11 @@
             });
         }
 
-        // 6. CONTROLS SETUP (D-Pad + Camera Orbit Angles)
+        // 6. CONTROLS & CAMERA
         const moveState = { forward: false, backward: false, left: false, right: false };
-        let cameraAngle = 0; // Rotates around player
-        const cameraDistance = 10;
-        const cameraHeight = 3.5;
+        let cameraAngle = 0;
+        const cameraDistance = 9;
+        const cameraHeight = 3.2;
 
         function bindButton(id, stateKey) {
             const btn = document.getElementById(id);
@@ -314,24 +323,22 @@
 
         // Camera Rotation Buttons
         let camRotateDir = 0;
-        document.getElementById('cam-left').addEventListener('touchstart', (e) => { e.preventDefault(); camRotateDir = 0.03; });
+        document.getElementById('cam-left').addEventListener('touchstart', (e) => { e.preventDefault(); camRotateDir = 0.035; });
         document.getElementById('cam-left').addEventListener('touchend', (e) => { e.preventDefault(); camRotateDir = 0; });
-        document.getElementById('cam-left').addEventListener('mousedown', () => { camRotateDir = 0.03; });
+        document.getElementById('cam-left').addEventListener('mousedown', () => { camRotateDir = 0.035; });
         document.getElementById('cam-left').addEventListener('mouseup', () => { camRotateDir = 0; });
 
-        document.getElementById('cam-right').addEventListener('touchstart', (e) => { e.preventDefault(); camRotateDir = -0.03; });
+        document.getElementById('cam-right').addEventListener('touchstart', (e) => { e.preventDefault(); camRotateDir = -0.035; });
         document.getElementById('cam-right').addEventListener('touchend', (e) => { e.preventDefault(); camRotateDir = 0; });
-        document.getElementById('cam-right').addEventListener('mousedown', () => { camRotateDir = -0.03; });
+        document.getElementById('cam-right').addEventListener('mousedown', () => { camRotateDir = -0.035; });
         document.getElementById('cam-right').addEventListener('mouseup', () => { camRotateDir = 0; });
 
-        // Keyboard Backup Controls
+        // Keyboard Backup
         window.addEventListener('keydown', (e) => {
             if (e.key === 'w' || e.key === 'ArrowUp') moveState.forward = true;
             if (e.key === 's' || e.key === 'ArrowDown') moveState.backward = true;
             if (e.key === 'a' || e.key === 'ArrowLeft') moveState.left = true;
             if (e.key === 'd' || e.key === 'ArrowRight') moveState.right = true;
-            if (e.key === 'q') cameraAngle += 0.1;
-            if (e.key === 'e') cameraAngle -= 0.1;
         });
         window.addEventListener('keyup', (e) => {
             if (e.key === 'w' || e.key === 'ArrowUp') moveState.forward = false;
@@ -340,20 +347,18 @@
             if (e.key === 'd' || e.key === 'ArrowRight') moveState.right = false;
         });
 
-        // 7. ANIMATION LOOP (Movement, Car traffic, Camera tracking, Character bounce animation)
-        const speed = 0.2;
+        // 7. ANIMATION LOOP
+        const speed = 0.18;
         let clock = new THREE.Clock();
 
         function animate() {
             requestAnimationFrame(animate);
             let time = clock.getElapsedTime();
 
-            // Rotate Camera if buttons pressed
             if (camRotateDir !== 0) {
                 cameraAngle += camRotateDir;
             }
 
-            // Movement relative to camera angle viewing direction
             let moveX = 0;
             let moveZ = 0;
 
@@ -367,28 +372,31 @@
                 moveX /= len;
                 moveZ /= len;
 
-                // Rotate movement vector to match camera orientation
                 const rx = moveX * Math.cos(cameraAngle) - moveZ * Math.sin(cameraAngle);
                 const rz = moveX * Math.sin(cameraAngle) + moveZ * Math.cos(cameraAngle);
 
                 player.position.x += rx * speed;
                 player.position.z += rz * speed;
 
-                // Walking Bobbing / Animation effect
-                player.position.y = 2.2 + Math.sin(time * 15) * 0.15;
+                // Walk bounce animation
+                player.position.y = 2.2 + Math.sin(time * 16) * 0.12;
             } else {
-                // Idle breathing / slight bounce animation when standing still
-                player.position.y = 2.2 + Math.sin(time * 4) * 0.05;
+                // Idle breathing animation
+                player.position.y = 2.2 + Math.sin(time * 4) * 0.04;
             }
 
-            // Move traffic cars
+            // Move traffic cars through the grid
             cars.forEach(car => {
-                car.mesh.position.z += car.speed * car.dir;
-                if (car.mesh.position.z > 150) car.mesh.position.z = -150;
-                if (car.mesh.position.z < -150) car.mesh.position.z = 150;
+                if (car.axis === 'x') {
+                    car.mesh.position.x += car.speed * car.dir;
+                    if (car.mesh.position.x > 180 || car.mesh.position.x < -180) car.dir *= -1;
+                } else {
+                    car.mesh.position.z += car.speed * car.dir;
+                    if (car.mesh.position.z > 180 || car.mesh.position.z < -180) car.dir *= -1;
+                }
             });
 
-            // Smooth 3D Camera Orbit Follow
+            // Smooth camera tracking
             const targetCamX = player.position.x + Math.sin(cameraAngle) * cameraDistance;
             const targetCamZ = player.position.z + Math.cos(cameraAngle) * cameraDistance;
             const targetCamY = player.position.y + cameraHeight;
@@ -397,14 +405,13 @@
             camera.position.y += (targetCamY - camera.position.y) * 0.1;
             camera.position.z += (targetCamZ - camera.position.z) * 0.1;
 
-            camera.lookAt(player.position.x, player.position.y + 0.5, player.position.z);
+            camera.lookAt(player.position.x, player.position.y + 0.4, player.position.z);
 
             renderer.render(scene, camera);
         }
 
         animate();
 
-        // Responsive window scaling
         window.addEventListener('resize', () => {
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
