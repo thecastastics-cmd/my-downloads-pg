@@ -3,528 +3,213 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Castastics On The Run - Download App</title>
-    <link rel="icon" type="image/png" href="favicon.png">
-    <meta property="og:title" content="Castastics On The Run - Download App">
-    <meta property="og:description" content="Play any Castastics character! Unlock over 275 runners, dodge obstacles, and outrun villains.">
-    <meta property="og:image" content="favicon.png">
-    
+    <title>Realistic 3D Open World</title>
     <style>
         body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #050505;
             font-family: Arial, sans-serif;
-            background-color: #f4f4f7;
-            margin: 0;
-            padding: 0 0 15px 0; /* Adjusted for full-width banner */
-            color: #333;
+            user-select: none;
         }
-
-        /* NEW: Top Promotional Banner */
-        .top-banner {
-            width: 100%;
-            height: auto;
-            max-height: 180px;
-            overflow: hidden;
-            margin-bottom: 15px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        .top-banner img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        /* Container padding for content below banner */
-        .content-container {
-            padding: 0 15px;
-        }
-
-        /* Top App Identity */
-        .app-header {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 20px;
-            background: white;
-            padding: 15px;
-            border-radius: 12px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
-        .app-icon {
-            width: 80px;
-            height: 80px;
-            border-radius: 18px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-        .app-title h1 {
-            font-size: 20px;
-            margin: 0 0 5px 0;
-        }
-        .developer {
-            color: #007aff;
-            font-size: 14px;
-            margin: 0;
-        }
-        .badge {
-            display: inline-block;
-            background-color: #e2f7ed;
-            color: #107c41;
-            padding: 3px 8px;
-            border-radius: 5px;
-            font-size: 11px;
-            margin-top: 5px;
-            font-weight: bold;
-        }
-
-        /* Direct APK Download Button */
-        .download-btn {
-            display: block;
-            background-color: #30c37c;
-            color: white;
-            text-align: center;
-            padding: 16px;
-            border-radius: 10px;
-            font-weight: bold;
-            font-size: 18px;
-            text-decoration: none;
-            box-shadow: 0 4px 10px rgba(48, 195, 124, 0.3);
-            margin-bottom: 25px;
-        }
-        .download-btn:active {
-            background-color: #28a768;
-        }
-
-        /* Trailers Section */
-        .section-title {
-            font-size: 16px;
-            font-weight: bold;
-            margin: 15px 0 10px 0;
-            color: #555;
-        }
-        .video-wrapper {
-            position: relative;
-            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-            height: 0;
-            overflow: hidden;
-            border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
-            background: #000;
-        }
-        .video-wrapper iframe {
+        #ui {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: 0;
-        }
-
-        /* APKPure Style Horizontal Screenshot Carousel */
-        .screenshot-carousel {
-            display: flex;
-            overflow-x: auto;
-            gap: 12px;
-            margin-bottom: 25px;
-            padding-bottom: 10px;
-            scroll-snap-type: x mandatory;
-            -webkit-overflow-scrolling: touch;
-        }
-        .screenshot-carousel img {
-            width: 200px;
-            height: auto;
-            border-radius: 10px;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
-            scroll-snap-align: start;
-            flex-shrink: 0;
-        }
-
-        /* Game Info Description Box */
-        .description-box {
-            background: white;
-            padding: 15px;
-            border-radius: 12px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            line-height: 1.5;
-            margin-bottom: 20px;
-        }
-        .description-box h3 {
-            margin-top: 0;
-            font-size: 16px;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 8px;
-        }
-
-        /* User Reviews Section styling */
-        .reviews-box {
-            background: white;
-            padding: 15px;
-            border-radius: 12px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            margin-bottom: 25px;
-        }
-        .reviews-box h3 {
-            margin-top: 0;
-            font-size: 16px;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 8px;
-            margin-bottom: 15px;
-        }
-        .rating-summary {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-        .big-rating {
-            font-size: 36px;
-            font-weight: bold;
-            color: #333;
-        }
-        .stars-container {
-            color: #ffcc00;
-            font-size: 18px;
-        }
-        .total-reviews {
-            font-size: 12px;
-            color: #777;
-            margin-top: 2px;
-        }
-
-        /* NEW: Submit Review Form Styling */
-        .add-review-form {
-            background: #f8f9fa;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            border: 1px solid #e9ecef;
-        }
-        .add-review-form h4 {
-            margin: 0 0 10px 0;
-            font-size: 14px;
-            color: #333;
-        }
-        .form-group {
-            margin-bottom: 10px;
-        }
-        .form-group input, .form-group select, .form-group textarea {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ccc;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #ffffff;
+            background: rgba(0, 0, 0, 0.75);
+            padding: 12px 24px;
             border-radius: 6px;
-            font-size: 13px;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
-        .form-group textarea {
-            resize: vertical;
-            height: 60px;
-        }
-        .submit-review-btn {
-            background-color: #007aff;
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            font-weight: bold;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 13px;
-        }
-        .submit-review-btn:hover {
-            background-color: #0056b3;
-        }
-
-        .review-card {
-            border-bottom: 1px solid #f0f0f2;
-            padding: 12px 0;
-        }
-        .review-card:last-child {
-            border-bottom: none;
-            padding-bottom: 0;
-        }
-        .review-user {
-            font-weight: bold;
             font-size: 14px;
-            margin: 0 0 4px 0;
-        }
-        .review-stars {
-            color: #ffcc00;
-            font-size: 12px;
-            margin-bottom: 6px;
-        }
-        .review-text {
-            font-size: 13px;
-            color: #555;
-            margin: 0;
-            line-height: 1.4;
+            pointer-events: none;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
         }
     </style>
 </head>
 <body>
 
-    <!-- NEW: Top Banner Element -->
-    <div class="top-banner">
-        <img src="game-banner.png" alt="Castastics On The Run Banner">
+    <div id="ui">
+        <b>WASD / Arrows</b> to Move | <b>Mouse</b> to Look Around<br>
+        Place your high-res texture image as <b>character.png</b> in the folder.
     </div>
 
-    <!-- Wrapped everything inside content container for clean padding -->
-    <div class="content-container">
+    <!-- Include Three.js from a CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
-        <div class="app-header">
-            <img src="game-icon.png" alt="Castastics Icon" class="app-icon">
-            <div class="app-title">
-                <h1>Castastics On The Run</h1>
-                <p class="developer">David Artsy</p>
-                <span class="badge">v75.1 (1K+ Downloads)</span>
-            </div>
-        </div>
+    <script>
+        // 1. SETUP SCENE, CAMERA, & RENDERER
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x0b0e14);
+        scene.fog = new THREE.FogExp2(0x0b0e14, 0.02);
 
-        <a href="Castastics On The Run.apk" class="download-btn">
-            Download Now
-        </a>
+        const camera = new THREE.PerspectiveCamera(65, window.innerWidth / window.innerHeight, 0.1, 1000);
+        
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.shadowMap.enabled = true;
+        renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+        renderer.outputEncoding = THREE.sRGBEncoding;
+        document.body.appendChild(renderer.domElement);
 
-        <div class="section-title">Official Game Trailer</div>
-        <div class="video-wrapper">
-            <iframe src="https://www.youtube.com/embed/nOXZltxpLmo" allowfullscreen></iframe>
-        </div>
+        // 2. ADVANCED LIGHTING (Realistic 3D look)
+        const ambientLight = new THREE.AmbientLight(0x202836, 1.2);
+        scene.add(ambientLight);
 
-        <div class="section-title">Screenshots & Roster</div>
-        <div class="screenshot-carousel">
-            <img src="shot1.png" alt="Character Roster">
-            <img src="shot2.png" alt="The Death Screen">
-            <img src="shot3.png" alt="Powerups">
-            <img src="shot4.png" alt="Avoid Castastic Villains">
-            <img src="shot5.png" alt="Get A High Score">
-            <img src="shot6.png" alt="Play As David">
-            <img src="shot7.png" alt="Run As Any Castastics Hero">
-            <img src="shot8.png" alt="Different Maps">
-        </div>
+        const sunLight = new THREE.DirectionalLight(0xfff5e6, 1.8);
+        sunLight.position.set(40, 60, 30);
+        sunLight.castShadow = true;
+        sunLight.shadow.mapSize.width = 2048;
+        sunLight.shadow.mapSize.height = 2048;
+        sunLight.shadow.camera.near = 0.5;
+        sunLight.shadow.camera.far = 250;
+        const d = 60;
+        sunLight.shadow.camera.left = -d;
+        sunLight.shadow.camera.right = d;
+        sunLight.shadow.camera.top = d;
+        sunLight.shadow.camera.bottom = -d;
+        scene.add(sunLight);
 
-        <div class="description-box">
-            <h3>Game Overview</h3>
-            <h3>About Castastics On The Run</h3>
-            <br>A runner game in the CastasticVerse, play any Castastics character! 🐾🌟<br>
-            <br>🏃‍♂️ Castastics On The Run!<br>
-            <br>Welcome to the ultimate endless runner experience! Castastics On The Run! Is a fast-paced, high-stakes mobile adventure where your reflexes are the only thing standing between you and a "Crashed!" screen.<br>
+        // 3. PROCEDURAL REALISTIC TERRAIN & STRUCTURES
+        // Detailed ground plane
+        const floorGeo = new THREE.PlaneGeometry(300, 300, 64, 64);
+        const floorMat = new THREE.MeshStandardMaterial({ 
+            color: 0x1a212d, 
+            roughness: 0.8,
+            metalness: 0.2
+        });
+        const floor = new THREE.Mesh(floorGeo, floorMat);
+        floor.rotation.x = -Math.PI / 2;
+        floor.receiveShadow = true;
+        scene.add(floor);
+
+        // Procedural Grid of Photorealistic Sci-Fi / Industrial Buildings
+        const buildingMaterial = new THREE.MeshStandardMaterial({ 
+            color: 0x222831, 
+            roughness: 0.4,
+            metalness: 0.6 
+        });
+        
+        const windowMaterial = new THREE.MeshBasicMaterial({ 
+            color: 0x00f0ff 
+        });
+
+        for (let i = 0; i < 40; i++) {
+            const width = Math.random() * 6 + 4;
+            const height = Math.random() * 25 + 8;
+            const depth = Math.random() * 6 + 4;
             
-            <br>🎮 Game Features
-            - Massive Character Roster: Unlock and play as over 275 unique characters! From Commons to Ultra-Rares, build your collection and find your favorite runner.<br>
-
-            <br>Action-Packed Gameplay: Test your skills with smooth mobile controls—Jump over obstacles, Slide under barriers, and weave through traffic to keep your run alive.<br>
-
-            <br>Epic Villain Encounters: Watch out! You aren't alone on the road. Three dangerous villains are on the prowl, ready to attack and end your streak at any moment.<br>
-
-            <br>Powerful Boosts: Level up your run by collecting game-changing power-ups:<br>
-
-            <br>🧲 Magnet: Pull in every coin in sight without moving an inch.<br>
-
-            <br>🛡️ Shield: Protect yourself from a single crash.<br>
-
-            <br>✨ Multiplier: Double your score gain and climb the leaderboard faster.<br>
-
-            <br>Daily Rewards: Loyalty pays off! Log in every 24 hours to claim your Daily Reward of 1,000 coins to help unlock that next legendary character.<br>
-
-            <br>High Score Mastery: Track your "Best Score" and "Bank" total as you compete to become the ultimate Castastics Master.<br>
-
-            <br>🕹️ How to Play<br>
-
-            <br>Open the game, you can also skip the intro to quickly get into the action!<br>
-
-            <br>Hit "RUN!" to start.<br>
-
-            <br>Swipe left, right, up and down to move, jump, and slide.<br>
-
-            <br>Collect coins to spend in the shop and unlock new faces!<br> 
-            <br> Take control of a massive universe featuring over 400 unique characters! Dodge obstacles, collect items, and outrun the chaos in this high-speed mobile runner developed entirely by David Artsy.<br>
-        </div>
-
-        <div class="section-title">User Reviews</div>
-        <div class="reviews-box">
-            <div class="rating-summary">
-                <div class="big-rating" id="avg-rating-display">4.9</div>
-                <div>
-                    <div class="stars-container">★★★★★</div>
-                    <div class="total-reviews" id="total-reviews-count">Based on 142 ratings</div>
-                </div>
-            </div>
-
-            <!-- NEW: Interactive Review Submission Form -->
-            <div class="add-review-form">
-                <h4>Leave a Review</h4>
-                <form id="reviewForm">
-                    <div class="form-group">
-                        <input type="text" id="usernameInput" placeholder="Your Name / Nickname" required>
-                    </div>
-                    <div class="form-group">
-                        <select id="ratingInput" required>
-                            <option value="" disabled selected>Give it a rating</option>
-                            <option value="5">★★★★★ (5 Stars)</option>
-                            <option value="4">★★★★☆ (4 Stars)</option>
-                            <option value="3">★★★☆☆ (3 Stars)</option>
-                            <option value="2">★★☆☆☆ (2 Stars)</option>
-                            <option value="1">★☆☆☆☆ (1 Star)</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <textarea id="reviewTextInput" placeholder="Write your game review here..." required></textarea>
-                    </div>
-                    <button type="submit" class="submit-review-btn">Submit Review</button>
-                </form>
-            </div>
-
-            <!-- Dynamic reviews will be placed on top of this container -->
-            <div id="reviews-list-container">
-                <!-- Existing Review 1 -->
-                <div class="review-card">
-                    <p class="review-user">GamerX_99</p>
-                    <div class="review-stars">★★★★★</div>
-                    <p class="review-text">The character roster in this game is insane!! Literally hundreds of runners to unlock. Controls are super smooth on my phone, perfect to play when traveling or just passing time.</p>
-                </div>
-
-                <!-- Existing Review 2 -->
-                <div class="review-card">
-                    <p class="review-user">IndieFan2026</p>
-                    <div class="review-stars">★★★★★</div>
-                    <p class="review-text">Best mobile runner out right now. The power-ups like the magnet make gathering coins satisfying, and the transition updates keep the tracks looking fresh. Highly recommend downloading the APK directly.</p>
-                </div>
-
-                <!-- Existing Review 3 -->
-                <div class="review-card">
-                    <p class="review-user">PixelDash</p>
-                    <div class="review-stars">★★★★★</div>
-                    <p class="review-text">Love the custom music and character art vibes! Very addictive trying to beat your high score while dodging those custom villains. Absolute 5 stars for the developer.</p>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-    <!-- NEW: JavaScript logic to add functional reviews dynamically -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getDatabase, ref, onValue, push, set } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
-
-        // Using your secure, restricted Firebase configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyBBx7S1tbTO02Y0TfSYodqJWRvLfQwq_Qs",
-            authDomain: "castastics-movies.firebaseapp.com",
-            databaseURL: "https://castastics-movies-default-rtdb.firebaseio.com",
-            projectId: "castastics-movies",
-            storageBucket: "castastics-movies.firebasestorage.app",
-            messagingSenderId: "194457932457",
-            appId: "1:194457932457:web:72e3372596f4f248a30fb8",
-            measurementId: "G-W59DD5SNZ6"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const db = getDatabase(app);
-        const reviewsRef = ref(db, 'gameReviews');
-
-        // Baseline stats (your 142 historical reviews)
-        const BASE_REVIEWS = 142;
-        const BASE_SCORE = 142 * 4.9;
-
-        const container = document.getElementById('reviews-list-container');
-        const reviewForm = document.getElementById('reviewForm');
-
-        // 1. Listen for ALL global reviews live from Firebase cloud
-        onValue(reviewsRef, (snapshot) => {
-            // Clear existing list to prevent duplicates on update
-            container.innerHTML = "";
-
-            let addedReviewsCount = 0;
-            let addedReviewsScore = 0;
-            let reviewCardsHTML = "";
-
-            if (snapshot.exists()) {
-                const data = snapshot.val();
-                
-                // Reverse loop through keys to show newest cloud reviews first
-                const keys = Object.keys(data).reverse();
-                keys.forEach(key => {
-                    const r = data[key];
-                    addedReviewsCount++;
-                    addedReviewsScore += r.rating;
-
-                    let starStrings = "★".repeat(r.rating) + "☆".repeat(5 - r.rating);
-
-                    reviewCardsHTML += `
-                        <div class="review-card">
-                            <p class="review-user">${escapeHtml(r.username)}</p>
-                            <div class="review-stars">${starStrings}</div>
-                            <p class="review-text">${escapeHtml(r.text)}</p>
-                        </div>
-                    `;
-                });
+            const buildingGeo = new THREE.BoxGeometry(width, height, depth);
+            const building = new THREE.Mesh(buildingGeo, buildingMaterial);
+            
+            building.position.x = (Math.random() - 0.5) * 200;
+            building.position.z = (Math.random() - 0.5) * 200;
+            building.position.y = height / 2;
+            
+            // Keep center clear for spawn
+            if (Math.abs(building.position.x) < 15 && Math.abs(building.position.z) < 15) {
+                building.position.x += 25;
             }
 
-            // Append the 3 baseline placeholder reviews back at the very bottom
-            reviewCardsHTML += `
-                <div class="review-card">
-                    <p class="review-user">GamerX_99</p>
-                    <div class="review-stars">★★★★★</div>
-                    <p class="review-text">The character roster in this game is insane!! Literally hundreds of runners to unlock. Controls are super smooth on my phone, perfect to play when traveling or just passing time.</p>
-                </div>
-                <div class="review-card">
-                    <p class="review-user">IndieFan2026</p>
-                    <div class="review-stars">★★★★★</div>
-                    <p class="review-text">Best mobile runner out right now. The power-ups like the magnet make gathering coins satisfying, and the transition updates keep the tracks looking fresh. Highly recommend downloading the APK directly.</p>
-                </div>
-                <div class="review-card">
-                    <p class="review-user">PixelDash</p>
-                    <div class="review-stars">★★★★★</div>
-                    <p class="review-text">Love the custom music and character art vibes! Very addictive trying to beat your high score while dodging those custom villains. Absolute 5 stars for the developer.</p>
-                </div>
-            `;
-
-            container.innerHTML = reviewCardsHTML;
-
-            // Recalculate dynamic aggregates including baseline + cloud data
-            const totalReviews = BASE_REVIEWS + addedReviewsCount;
-            const totalScore = BASE_SCORE + addedReviewsScore;
-            const finalAvg = (totalScore / totalReviews).toFixed(1);
-
-            document.getElementById('total-reviews-count').innerText = `Based on ${totalReviews} ratings`;
-            document.getElementById('avg-rating-display').innerText = finalAvg;
-
-            // Optional: Hide form if this user has already left a review locally
-            if (localStorage.getItem('hasReviewedGame') === 'true') {
-                const formBlock = document.querySelector('.add-review-form');
-                if (formBlock) formBlock.innerHTML = "<h4>Thank you for leaving your review!</h4>";
-            }
-        });
-
-        // 2. Submit new review data globally to Firebase Cloud
-        reviewForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            if (localStorage.getItem('hasReviewedGame') === 'true') {
-                alert("You have already submitted a review for this game!");
-                return;
-            }
-
-            const username = document.getElementById('usernameInput').value.trim();
-            const ratingValue = parseInt(document.getElementById('ratingInput').value);
-            const reviewText = document.getElementById('reviewTextInput').value.trim();
-
-            const newReviewRef = push(reviewsRef);
-            set(newReviewRef, {
-                username: username,
-                rating: ratingValue,
-                text: reviewText,
-                timestamp: Date.now()
-            }).then(() => {
-                localStorage.setItem('hasReviewedGame', 'true');
-                reviewForm.reset();
-            }).catch((error) => {
-                console.error("Database submission failed: ", error);
-            });
-        });
-
-        // Helper function to keep database inputs clean and safe
-        function escapeHtml(str) {
-            return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+            building.castShadow = true;
+            building.receiveShadow = true;
+            scene.add(building);
         }
+
+        // 4. LOAD CHARACTER (Textured Sprite with Realistic Lighting Integration)
+        const textureLoader = new THREE.TextureLoader();
+        const charTexture = textureLoader.load('character.png', 
+            () => { console.log("Character texture loaded!"); },
+            undefined,
+            (err) => { console.warn("character.png missing in folder. Falling back to placeholder.", err); }
+        );
+        charTexture.encoding = THREE.sRGBEncoding;
+
+        // Using SpriteMaterial so it always faces camera cleanly in the 3D space
+        const spriteMat = new THREE.SpriteMaterial({ 
+            map: charTexture, 
+            transparent: true,
+            roughness: 0.5
+        });
+        const player = new THREE.Sprite(spriteMat);
+        
+        player.scale.set(3.5, 5, 1);
+        player.position.set(0, 2.5, 0);
+        scene.add(player);
+
+        // 5. INPUT & MOUSE LOOK CONTROLS
+        const keys = {};
+        window.addEventListener('keydown', (e) => { keys[e.key.toLowerCase()] = true; });
+        window.addEventListener('keyup', (e) => { keys[e.key.toLowerCase()] = false; });
+
+        let cameraAngle = 0;
+        let cameraHeight = 5;
+        let cameraDistance = 12;
+
+        window.addEventListener('mousemove', (e) => {
+            if (document.pointerLockElement === document.body) {
+                cameraAngle -= e.movementX * 0.003;
+            }
+        });
+
+        document.body.addEventListener('click', () => {
+            document.body.requestPointerLock();
+        });
+
+        // 6. HIGH-PERFORMANCE ANIMATION LOOP
+        const speed = 0.2;
+        const vectorMove = new THREE.Vector3();
+
+        function animate() {
+            requestAnimationFrame(animate);
+
+            // Movement calculations relative to camera look direction
+            let moveX = 0;
+            let moveZ = 0;
+
+            if (keys['w'] || keys['arrowup'])    moveZ -= 1;
+            if (keys['s'] || keys['arrowdown'])  moveZ += 1;
+            if (keys['a'] || keys['arrowleft'])  moveX -= 1;
+            if (keys['d'] || keys['arrowright']) moveX += 1;
+
+            if (moveX !== 0 || moveZ !== 0) {
+                // Normalize vector for uniform diagonal speed
+                const length = Math.sqrt(moveX * moveX + moveZ * moveZ);
+                moveX /= length;
+                moveZ /= length;
+
+                // Rotate movement vector based on camera angle
+                const rx = moveX * Math.cos(cameraAngle) - moveZ * Math.sin(cameraAngle);
+                const rz = moveX * Math.sin(cameraAngle) + moveZ * Math.cos(cameraAngle);
+
+                player.position.x += rx * speed;
+                player.position.z += rz * speed;
+            }
+
+            // Smooth 3D Camera Tracking Orbit
+            const targetCamX = player.position.x + Math.sin(cameraAngle) * cameraDistance;
+            const targetCamZ = player.position.z + Math.cos(cameraAngle) * cameraDistance;
+            const targetCamY = player.position.y + cameraHeight;
+
+            camera.position.x += (targetCamX - camera.position.x) * 0.1;
+            camera.position.y += (targetCamY - camera.position.y) * 0.1;
+            camera.position.z += (targetCamZ - camera.position.z) * 0.1;
+
+            camera.lookAt(player.position.x, player.position.y + 1, player.position.z);
+
+            renderer.render(scene, camera);
+        }
+
+        animate();
+
+        // Responsive window scaling
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
     </script>
 </body>
 </html>
